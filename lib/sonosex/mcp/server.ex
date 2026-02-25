@@ -18,6 +18,11 @@ defmodule Sonosex.MCP.Server do
       Sonosex.MCP.Tools.PlayUri,
       Sonosex.MCP.Tools.ClearQueue,
       Sonosex.MCP.Tools.Zones,
-      Sonosex.MCP.Tools.SleepTimer
+      Sonosex.MCP.Tools.SleepTimer,
+      Sonosex.MCP.Tools.Group,
+      Sonosex.MCP.Tools.Ungroup,
+      Sonosex.MCP.Tools.Diagnostics,
+      Sonosex.MCP.Tools.NetworkStatus,
+      Sonosex.MCP.Tools.CheckAll
     ]
 end

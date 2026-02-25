@@ -79,6 +79,11 @@ Add to your Claude Desktop config:
 | `sonos_clear_queue` | Clear the playback queue |
 | `sonos_zones` | Get zone/group topology |
 | `sonos_sleep_timer` | Set or cancel sleep timer |
+| `sonos_group` | Group speakers together (first is coordinator) |
+| `sonos_ungroup` | Remove a speaker from its group |
+| `sonos_diagnostics` | Deep diagnostics for a speaker (transport, firmware, track info) |
+| `sonos_network_status` | Network matrix and interface stats for troubleshooting |
+| `sonos_check_all` | Quick health check across all discovered speakers |
 
 ## How It Works
 
@@ -105,7 +110,7 @@ lib/sonosex/
     content_directory.ex # Queue browsing
   mcp/
     server.ex          # EMCP server with tool registration
-    tools/             # 16 MCP tool modules
+    tools/             # 21 MCP tool modules
 ```
 
 ## Running Standalone

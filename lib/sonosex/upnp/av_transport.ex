@@ -67,4 +67,8 @@ defmodule Sonosex.UPnP.AVTransport do
       NewSleepTimerDuration: duration
     )
   end
+
+  def become_standalone(ip) do
+    SOAP.call(ip, :av_transport, "BecomeCoordinatorOfStandaloneGroup", InstanceID: 0, CurrentSpeed: 1)
+  end
 end
