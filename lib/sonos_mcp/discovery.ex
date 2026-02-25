@@ -85,9 +85,18 @@ defmodule SonosMcp.Discovery do
   def handle_info(_msg, state), do: {:noreply, state}
 
   defp do_discover do
-    case ssdp_discover() do
+    ips = case System.get_env("SONOS_SPEAKERS") do
+      nil -> ssdp_discover()
+      "" -> ssdp_discover()
+      speakers ->
+        ips = speakers |> String.split(",") |> Enum.map(&String.trim/1) |> Enum.reject(&(&1 == ""))
+        Logger.info("Using #{length(ips)} speaker(s) from SONOS_SPEAKERS: #{Enum.join(ips, ", ")}")
+        {:ok, ips}
+    end
+
+    case ips do
       {:ok, ips} when ips != [] ->
-        Logger.info("SSDP found #{length(ips)} Sonos speaker(s): #{Enum.join(ips, ", ")}")
+        Logger.info("Found #{length(ips)} Sonos speaker(s): #{Enum.join(ips, ", ")}")
 
         case fetch_zone_topology(ips) do
           groups when is_list(groups) and groups != [] ->
@@ -99,7 +108,7 @@ defmodule SonosMcp.Discovery do
         end
 
       {:ok, []} ->
-        Logger.info("No Sonos speakers found via SSDP")
+        Logger.info("No Sonos speakers found")
         %{}
 
       {:error, _} ->
