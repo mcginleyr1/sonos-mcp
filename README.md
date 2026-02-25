@@ -39,7 +39,7 @@ Add to your Claude Desktop config (`~/.claude/settings.json`):
 Build the image:
 
 ```bash
-docker build -t sonosex .
+docker build -t mcginleyr1/sonos-mcp .
 ```
 
 Add to your Claude Desktop config:
@@ -49,13 +49,15 @@ Add to your Claude Desktop config:
   "mcpServers": {
     "sonosex": {
       "command": "docker",
-      "args": ["run", "--rm", "-i", "--network", "host", "sonosex"]
+      "args": ["run", "--rm", "-i", "--network", "host", "mcginleyr1/sonos-mcp"]
     }
   }
 }
 ```
 
 `-i` keeps stdin open for MCP STDIO transport. `--network host` is required for SSDP multicast discovery on your LAN.
+
+**Note:** `--network host` only provides true host networking on **Linux**. On macOS, Docker runs inside a Linux VM (Docker Desktop, OrbStack, etc.) which blocks SSDP multicast from reaching your LAN. Use the Mix setup above for macOS development.
 
 ## Available MCP Tools
 

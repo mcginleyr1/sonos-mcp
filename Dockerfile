@@ -17,7 +17,7 @@ RUN mix compile && mix release
 FROM debian:bookworm-slim
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends libstdc++6 libncurses5 && \
+    apt-get install -y --no-install-recommends libstdc++6 libncurses5 libssl3 && \
     rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /app/_build/prod/rel/sonosex /app
