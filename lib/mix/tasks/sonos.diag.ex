@@ -1,8 +1,8 @@
 defmodule Mix.Tasks.Sonos.Diag do
   use Mix.Task
 
-  alias Sonosex.{Speaker, Discovery}
-  alias Sonosex.UPnP.{AVTransport, DeviceProperties}
+  alias SonosMcp.{Speaker, Discovery}
+  alias SonosMcp.UPnP.{AVTransport, DeviceProperties}
 
   @shortdoc "Deep diagnostics for a single Sonos speaker"
 

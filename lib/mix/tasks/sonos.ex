@@ -4,8 +4,8 @@ defmodule Mix.Tasks.Sonos do
   def ensure_discovery do
     Application.ensure_all_started(:req)
 
-    case GenServer.whereis(Sonosex.Discovery) do
-      nil -> Sonosex.Discovery.start_link([])
+    case GenServer.whereis(SonosMcp.Discovery) do
+      nil -> SonosMcp.Discovery.start_link([])
       pid -> {:ok, pid}
     end
 
@@ -18,7 +18,7 @@ defmodule Mix.Tasks.Sonos do
     Process.sleep(8_000)
 
     Enum.reduce_while(1..10, [], fn _, _acc ->
-      case GenServer.call(Sonosex.Discovery, :list, 30_000) do
+      case GenServer.call(SonosMcp.Discovery, :list, 30_000) do
         [] ->
           Process.sleep(2_000)
           {:cont, []}

@@ -1,21 +1,21 @@
-defmodule Sonosex.MixProject do
+defmodule SonosMcp.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :sonosex,
+      app: :sonos_mcp,
       version: "0.2.0",
       elixir: "~> 1.19",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      releases: [sonosex: [applications: [sonosex: :permanent]]]
+      releases: [sonos_mcp: [applications: [sonos_mcp: :permanent]]]
     ]
   end
 
   def application do
     [
       extra_applications: [:logger, :xmerl],
-      mod: {Sonosex, []}
+      mod: {SonosMcp, []}
     ]
   end
 

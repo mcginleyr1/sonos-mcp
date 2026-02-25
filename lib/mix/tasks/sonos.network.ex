@@ -1,7 +1,7 @@
 defmodule Mix.Tasks.Sonos.Network do
   use Mix.Task
 
-  alias Sonosex.Discovery
+  alias SonosMcp.Discovery
 
   @shortdoc "Network diagnostics: WiFi matrix and interface stats from a Sonos speaker"
 

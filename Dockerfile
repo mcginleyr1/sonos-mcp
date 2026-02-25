@@ -20,6 +20,6 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends libstdc++6 libncurses5 libssl3 && \
     rm -rf /var/lib/apt/lists/*
 
-COPY --from=builder /app/_build/prod/rel/sonosex /app
+COPY --from=builder /app/_build/prod/rel/sonos_mcp /app
 
-CMD ["/app/bin/sonosex", "start"]
+CMD ["/app/bin/sonos_mcp", "start"]

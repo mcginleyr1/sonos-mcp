@@ -1,4 +1,4 @@
-# Sonosex
+# sonos-mcp
 
 Local UPnP/SOAP MCP server for controlling Sonos speakers directly on your LAN. No cloud API, no OAuth, no registered domain needed.
 
@@ -25,10 +25,10 @@ Add to your Claude Desktop config (`~/.claude/settings.json`):
 ```json
 {
   "mcpServers": {
-    "sonosex": {
+    "sonos-mcp": {
       "command": "mix",
       "args": ["run", "--no-halt"],
-      "cwd": "/path/to/sonosex"
+      "cwd": "/path/to/sonos-mcp"
     }
   }
 }
@@ -47,7 +47,7 @@ Add to your Claude Desktop config:
 ```json
 {
   "mcpServers": {
-    "sonosex": {
+    "sonos-mcp": {
       "command": "docker",
       "args": ["run", "--rm", "-i", "--network", "host", "mcginleyr1/sonos-mcp"]
     }
@@ -97,7 +97,7 @@ Transport commands (play, pause, next, etc.) route to the group coordinator. Vol
 ## Architecture
 
 ```
-lib/sonosex/
+lib/sonos_mcp/
   speaker.ex           # Speaker struct
   xml.ex               # xmerl parsing helpers
   soap.ex              # SOAP envelope builder + HTTP caller
@@ -111,6 +111,10 @@ lib/sonosex/
   mcp/
     server.ex          # EMCP server with tool registration
     tools/             # 21 MCP tool modules
+lib/mix/tasks/
+  sonos.check.ex       # Fleet health check
+  sonos.diag.ex        # Single speaker diagnostics
+  sonos.network.ex     # Network matrix and interface stats
 ```
 
 ## CLI Diagnostics

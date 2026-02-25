@@ -1,8 +1,8 @@
 defmodule Mix.Tasks.Sonos.Check do
   use Mix.Task
 
-  alias Sonosex.Speaker
-  alias Sonosex.UPnP.AVTransport
+  alias SonosMcp.Speaker
+  alias SonosMcp.UPnP.AVTransport
 
   @shortdoc "Quick health check across all Sonos speakers"
 
@@ -76,7 +76,7 @@ defmodule Mix.Tasks.Sonos.Check do
   defp get_firmware_versions(speakers) do
     speakers
     |> Enum.reduce(%{}, fn speaker, acc ->
-      case Sonosex.UPnP.DeviceProperties.get_zone_info(speaker.ip) do
+      case SonosMcp.UPnP.DeviceProperties.get_zone_info(speaker.ip) do
         {:ok, data} ->
           version = data["DisplaySoftwareVersion"] || data["SoftwareVersion"] || "unknown"
           Map.update(acc, version, [speaker.name], &[speaker.name | &1])
