@@ -113,6 +113,16 @@ lib/sonosex/
     tools/             # 21 MCP tool modules
 ```
 
+## CLI Diagnostics
+
+Mix tasks for direct terminal use (no MCP protocol needed):
+
+```bash
+mix sonos.check              # fleet health check — all speakers, groups, firmware versions
+mix sonos.diag "Office"      # deep diagnostics — transport, track, firmware, IP/MAC
+mix sonos.network "Office"   # network matrix — WiFi signal, noise floor, packet drops
+```
+
 ## Running Standalone
 
 ```bash

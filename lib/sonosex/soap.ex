@@ -63,7 +63,7 @@ defmodule Sonosex.SOAP do
   end
 
   defp parse_response(body, action) do
-    doc = Sonosex.XML.parse(body)
+    doc = body |> sanitize_xml() |> Sonosex.XML.parse()
     response_tag = String.to_atom("#{action}Response")
 
     case find_element(doc, response_tag) do
@@ -126,6 +126,10 @@ defmodule Sonosex.SOAP do
     |> xmlElement(:content)
     |> Enum.filter(&Record.is_record(&1, :xmlText))
     |> Enum.map_join(fn text -> text |> xmlText(:value) |> to_string() end)
+  end
+
+  defp sanitize_xml(body) do
+    String.replace(body, ~r/[^\x09\x0A\x0D\x20-\x7E]/, "")
   end
 
   defp escape(string) do
